@@ -11,25 +11,30 @@ test_that("integrateIt is receiving the correct inputs (x = vector, y = vector, 
 })
 
 test_that("Class of output is correct",{
-  expect_is(integrateIt(x = c(1,2,3), y = c(1,4,9), from = c(1,3), Rule = "Trap")[[1]], 
+  expect_is(integrateIt(x = c(1,2,3), y = c(1,4,9), from = c(1,3), Rule = "Trap"), 
             "Trapezoid")
 })
 
 test_that("Class of output is correct",{
-  expect_is(integrateIt(x = c(1,2,3), y = c(1,4,9), from = c(1,3), Rule = "Simpsons")[[1]], 
-            "Simpsons")
+  expect_is(integrateIt(x = c(1,2,3), y = c(1,4,9), from = c(1,3), Rule = "Simpsons"), "Simpsons")
 })
 
 
 test_that("the trapezoid rule portion of integrateIt returns the proper value", {
-  expect_equal(integrateIt(x = c(1,2,3,4,5), y = c(1,4,9,16,25), from = c(1,5), Rule = "Trap")[[3]],
+  expect_equal(integrateIt(x = c(1,2,3,4,5), y = c(1,4,9,16,25), from = c(1,5), Rule = "Trap")@result,
               42)
 })
 
 
 test_that("the Simpson's rule portion of integrateIt returns the proper value", {
-  expect_equal(integrateIt(x = c(1,2,3,4,5), y = c(1,4,9,16,25), from = c(1,5), Rule = "Simpsons")[[3]],
-              41.333333333333)
+  expect_equal(integrateIt(x = c(1,2,3,4,5), y = c(1,4,9,16,25), from = c(1,5), Rule = "Simpsons")@result,
+              41.33333333333)
+})
+
+context("Printing")
+test_that("Print produces the correct number",{
+  expect_equal(as.character(integrateIt(x = c(1,2,3,4,5), y = c(1,4,9,16,25), from = c(1,5), Rule = "Trap")@result), 
+            print(integrateIt(x = c(1,2,3,4,5), y = c(1,4,9,16,25), from = c(1,5), Rule = "Trap")))
 })
 
 

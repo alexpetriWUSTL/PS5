@@ -14,16 +14,16 @@
 #' @seealso \code{\link{integrateIt}}
 #' @rdname print_It
 #' @export
-setMethod(f="print_It",
-          definition=function(object){
-            print(object@result)
+setMethod(f="print", "Simpsons", #a print method for simpsons
+          definition=function(x){
+            paste(as.character(x@result))
           }
           )
 
 #' @export
-setMethod(f="print",
-          definition=function(object){
-            print(object@result)
+setMethod(f="print", "Trapezoid", #a print method for trap
+          definition=function(x){
+            paste(as.character(x@result))
           }
 )
 

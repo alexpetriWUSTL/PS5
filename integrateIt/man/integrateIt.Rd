@@ -18,8 +18,6 @@ integrateIt(x, y, from, Rule)
 \value{
 An object of class Trapezoid or class Simpsons containing the class, the x and y vectors, and the result of the integration
  \item{object}{An object of class Trapezoid Simpson}
- \item{x_and_y}{The vector of x and y values}
- \item{integral}{The computed integration}
 }
 \description{
 Integrates via Trapezoid or Simpsons Rule
@@ -32,7 +30,7 @@ integrateIt(x = c(1,2,3), y = c(1,4,9), from = c(1,3), Rule = "Trap")
 
 }
 \seealso{
-\code{\link{print_It}}
+\code{\link{print}}
 }
 \author{
 Alex Petri

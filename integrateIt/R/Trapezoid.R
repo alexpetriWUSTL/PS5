@@ -36,10 +36,10 @@ setMethod("initialize", "Trapezoid",
 
 #' @export
 setValidity("Trapezoid", function(object){ 
-  if (!identical(length(object@x), length(object@y))){
+  if (!identical(length(object@x), length(object@y))){ #if user inputs x and y with different lengths (impossible to compute)
     return("The x and y arguments must have the same length")
   }
-  else if (length(x) == 1){
+  else if (length(object@x) == 1){ #if there is only one data point (can't run the integration then!)
     return("x must have a length longer than 1 in order to perform the integration")
   }
 }

@@ -37,11 +37,11 @@ setMethod("initialize", "Simpsons",
 
 #' @export
 setValidity("Simpsons", function(object){ 
-  if (!identical(length(object@x), length(object@y))){
+  if (!identical(length(object@x), length(object@y))){ #so the lengths aren't mismatched!
     return("The x and y arguments must have the same length")
   }
   #next we make sure simpsons has an odd number of y's
-  else if (object@y %% 2 == 0){
+  else if (length(object@y %% 2) == 0){ 
     return("Simpson's rule is only valid for objects with y's of odd length")
   }
 }
