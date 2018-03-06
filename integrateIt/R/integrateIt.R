@@ -15,7 +15,7 @@
 #' @examples
 #' 
 #' 
-#' integrateIt(x = c(1,2,3), y = c(3,3,5), from = c(3,1), Rule = "Trapezoid")
+#' integrateIt(x = c(1,2,3), y = c(1,4,9), from = c(1,3), Rule = "Trap")
 #' 
 #' 
 #' @seealso \code{\link{print_It}}
@@ -29,17 +29,32 @@ setGeneric(name="integrateIt",
 #' @export
 setMethod(f="integrateIt",
           definition = function(x, y, from, Rule){
-            if (Rule == "Trap"){
+            if (length(from) != 2){
+              return("from must be a vector of length two")
+            }
+            else if (from != c(min(x), max(x))){
+              return("from must be a vector containing the maximum and minimum values of x")
+            }
+            else if (Rule == "Trap"){
               h <- (max(x) - min(x))/(length(x)-1)
-              trapezoid <- (h/2)*(y[1] + 2*(sum(y[-c(1, length(y))])) + y[length(y)])
-              return(new("Trapezoid", trapezoid, x = x, y = y))
+              resultTrap <- (h/2)*(y[1] + 2*(sum(y[-c(1, length(y))])) + y[length(y)])
+              object <- new("Trapezoid", x = x, y = y, result = resultTrap)
+              x_and_y <- data.frame(x, y)
+              return(list(object, x_and_y, resultTrap))
             } 
             else if (Rule == "Simpsons"){
               h <- (max(x) - min(x))/(length(x)-1)
-              simpsons <- (h/3)*(y[1] + 4*(sum(y[seq(2, (length(y)-1), 2)])) + 2*(sum(y[seq(3, (length(y)-1), 2)])) + y[length(y)])
-              return(new("Simpsons", simpsons, x = x, y = y))
+              if(length(y) == 3){
+                resultSimp <- (h/3)*(y[1] + 4*(sum(y[seq(2, (length(y)-1), 2)])) + y[length(y)])
+              } else {
+                resultSimp <- (h/3)*(y[1] + 4*(sum(y[seq(2, (length(y)-1), 2)])) + 2*(sum(y[seq(3, (length(y)-1), 2)])) + y[length(y)])
+              }
+              object <- new("Simpsons", x = x, y = y, result = resultSimp)
+              x_and_y <- data.frame(x, y)
+              return(list(object, x_and_y, resultSimp))
+            } else {
+              return("You must choose either'Simpsons' or 'Trap' for the Rule argument")
             }
           }
           )
-
 

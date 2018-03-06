@@ -3,47 +3,33 @@
 #x and y must be of the same length
 #various tests to see if the output is right
 #from must be values found in x
+#one must be even or odd or something like that 
 
-context("Trapezoid and Simpson's Rule")
-test_that("x and y are of the same length", {
-  expect_that(identical(length(x), length(y)))
+context("integrateIt")
+test_that("integrateIt is receiving the correct inputs (x = vector, y = vector, from = vector of min and max (x), Rule = character of 'Trap' or 'Simpsons'", {
+  expect_error(integrateIt("p"))
 })
 
-test_that("Rule is designated as either 'Trap' or 'Simpsons'", {
-  expect_error(addSquares("p"))
+test_that("Class of output is correct",{
+  expect_is(integrateIt(x = c(1,2,3), y = c(1,4,9), from = c(1,3), Rule = "Trap")[[1]], 
+            "Trapezoid")
 })
 
-test_that("The class of the output is correct", {
-  expect_is(addSquares(1,2), "Squares")
-})
-
-
-context("Subtracting squares")
-test_that("squares subtract correctly", {
-  expect_that(subtractSquares(9, 2),
-              equals(new("Squares", square=(77), x = 9, y = 2)))
-})
-
-test_that("An error is produced when the input is incorrect" , {
-  expect_error(subtractSquares("p"))
-})
-
-test_that("The class of the output is correct", {
-  expect_is(subtractSquares(1,2), "Squares")
+test_that("Class of output is correct",{
+  expect_is(integrateIt(x = c(1,2,3), y = c(1,4,9), from = c(1,3), Rule = "Simpsons")[[1]], 
+            "Simpsons")
 })
 
 
-
-context("Multiplying squares")
-test_that("squares multiply correctly", {
-  expect_that(multiplySquares(3, 4),
-              equals(new("Squares", square=(144), x = 3, y = 4)))
+test_that("the trapezoid rule portion of integrateIt returns the proper value", {
+  expect_equal(integrateIt(x = c(1,2,3,4,5), y = c(1,4,9,16,25), from = c(1,5), Rule = "Trap")[[3]],
+              42)
 })
 
-test_that("An error is produced when the input is incorrect" , {
-  expect_error(subtractSquares("p"))
+
+test_that("the Simpson's rule portion of integrateIt returns the proper value", {
+  expect_equal(integrateIt(x = c(1,2,3,4,5), y = c(1,4,9,16,25), from = c(1,5), Rule = "Simpsons")[[3]],
+              41.333333333333)
 })
 
-test_that("The class of the output is correct", {
-  expect_is(subtractSquares(1,2), "Squares")
-})
+

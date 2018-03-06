@@ -2,33 +2,29 @@
 #'
 #' This function prints out the result of integrateIt
 #'
-#' @param x A numeric object
+#' @param x The object of class "Trapezoid" or "Simpsons" at the returned result from the integrateIt function
 #'
-#' @return A list with the elements
-#'  \item{squares}{The difference of the squared values}
-#'  \item{x}{The first object input} 
-#'  \item{y}{The second object input}
 #' @author Alex Petri
 #' @examples
 #' 
-#' myX <- c(20, 3) 
-#' myY <- c(-2, 4.1) 
-#' subtractSquares(myX, myY)
+#' result <- integrateIt(x = c(1,2,3), y = c(1,4,9), from = c(1,3), Rule = "Trapezoid")
+#' print(result)
+#' 
+#' 
 #' @seealso \code{\link{integrateIt}}
 #' @rdname print_It
 #' @export
-setGeneric(name="print_It",
-           def=function(x,...)
-           {standardGeneric("")}
-           )
-
-#' @export
 setMethod(f="print_It",
-          definition=function(x,...){
-            print())
+          definition=function(object){
+            print(object@result)
           }
           )
 
-
+#' @export
+setMethod(f="print",
+          definition=function(object){
+            print(object@result)
+          }
+)
 
 

@@ -35,11 +35,8 @@ setMethod("initialize", "Trapezoid",
          ) 
 
 #' @export
-setValidity(class = c("Trapezoid", "Simpsons"), function(object){ 
-  if (object@y %% 2 != 0){
-    return("Trapezoids's rule is only valid for objects with y's of even length")
-  }
-  else if (!identical(length(object@x), length(object@y))){
+setValidity("Trapezoid", function(object){ 
+  if (!identical(length(object@x), length(object@y))){
     return("The x and y arguments must have the same length")
   }
   else if (length(x) == 1){

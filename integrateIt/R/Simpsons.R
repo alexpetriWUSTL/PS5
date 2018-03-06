@@ -36,7 +36,7 @@ setMethod("initialize", "Simpsons",
 
 
 #' @export
-setValidity(class = "Simpsons", function(object){ 
+setValidity("Simpsons", function(object){ 
   if (!identical(length(object@x), length(object@y))){
     return("The x and y arguments must have the same length")
   }
